@@ -1,0 +1,4 @@
+## Interface: 11304
+## Title: spellPowerValue
+## SavedVariablesPerCharacter:  spvLock, spvPoint, spvRelativePoint, spvxOfs, spvyOfs
+spellPowerValue.lua
