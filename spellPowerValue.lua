@@ -42,35 +42,13 @@ tooltipCompare2Frame.TextLabel:SetJustifyV("CENTER")
 
 
 --variable init getCurrentStats
-hitValue = 0
-critValue = 0
-intValue = 0
+local hitValue
+local critValue
+local intValue
 
 --variable init speTooltip
-intNum = 0
-hitNum = 0
-critNum = 0
-spNum = 0
-spVal = 0
-spetext = "0"
+local spVal
 
---variable init speTooltipCompare1
-intNumComp1 = 0
-hitNumComp1 = 0
-critNumComp1 = 0
-spNumComp1 = 0
-spValComp1 = 0
-maxVal1 = 0
-spetextComp1 = "0"
-
---variable init speTooltipCompare2
-intNumComp2 = 0
-hitNumComp2 = 0
-critNumComp2 = 0
-spNumComp2 = 0
-spValComp2 = 0
-maxVal2 = 0
-spetextComp2 = "0"
 
 --stat weights
 local function getCurrentStats(self)
@@ -105,11 +83,10 @@ statFrame:SetScript("OnEvent", getCurrentStats)
 
 --tooltip stats
 local function speTooltip(self)
-    intNum = 0
-    hitNum = 0
-    critNum = 0
-    spNum = 0
-    spVal = 0
+    local intNum = 0
+    local hitNum = 0
+    local critNum = 0
+    local spNum = 0
     local rowLast = 0
     for i=1, GameTooltip:NumLines() do
         if _G["GameTooltipTextLeft"..i]:GetText() ~= nil then
@@ -247,7 +224,7 @@ ShoppingTooltip1:SetScript("OnUpdate", speTooltipCompare1)
     critNumComp2 = 0
     spNumComp2 = 0
     spValComp2 = 0
-     local rowLastComp2 = 0
+    local rowLastComp2 = 0
     for k=1, ShoppingTooltip2:NumLines() do
          spetextComp2 = _G["ShoppingTooltip2TextLeft"..k]:GetText()
          intFindComp2 = strmatch(spetextComp2:lower(),"^+%d+ intellect$")
