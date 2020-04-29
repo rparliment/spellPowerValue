@@ -155,7 +155,7 @@ local function speTooltip(self)
         end
     end
     spVal = intNum + hitNum + critNum + spNum
-    if spVal > 0 then
+    if spVal ~= nil then
         tooltipFrame.TextLabel:SetText(spVal.." SPE")
     else
         tooltipFrame.TextLabel:SetText("")
@@ -163,10 +163,9 @@ local function speTooltip(self)
     end
 end
 -- GameTooltip:SetScript("OnShow", speTooltip)
--- GameTooltip:SetScript("OnUpdate", speTooltip)
+GameTooltip:SetScript("OnUpdate", speTooltip)
 -- GameTooltip:SetScript("OnHide", speTooltip)
--- GameTooltip:SetScript("OnUpdate", speTooltip)
-
+-- GameTooltip:HookScript("OnShow", speTooltip)
 
 
 --tooltip1 stats
@@ -219,7 +218,7 @@ local function speTooltipCompare1(self)
         end
     end
     spValComp1 = intNumComp1 + hitNumComp1 + critNumComp1 + spNumComp1
-    if spValComp1 > 0 then
+    if spValComp1 ~= nil then
         if spVal ~= spValComp1 and spVal ~= nil and spValComp1 ~= nil then
             local maxVal1 = math.max(spVal, spValComp1)
             if spVal == maxVal1 then
@@ -236,12 +235,12 @@ local function speTooltipCompare1(self)
     end
 end
 -- ShoppingTooltip1:SetScript("OnShow", speTooltipCompare1)
--- ShoppingTooltip1:SetScript("OnUpdate", speTooltipCompare1)
+ShoppingTooltip1:SetScript("OnUpdate", speTooltipCompare1)
 -- ShoppingTooltip1:SetScript("OnHide", speTooltipCompare1)
--- ShoppingTooltip1:SetScript("OnUpdate", speTooltipCompare1)
 
 
---tooltip2 stats
+
+-- tooltip2 stats
  function speTooltipCompare2(self)
     intNumComp2 = 0
     hitNumComp2 = 0
@@ -291,7 +290,7 @@ end
         end
     end
     spValComp2 = intNumComp2 + hitNumComp2 + critNumComp2 + spNumComp2
-    if spValComp2 > 0 then
+    if spValComp2 ~= nil then
         tooltipCompare2Frame.TextLabel:SetText(spValComp2.." SPE")
     else
         tooltipCompare2Frame.TextLabel:SetText("")
@@ -301,7 +300,7 @@ end
 -- ShoppingTooltip2:SetScript("OnShow", speTooltipCompare2)
 -- ShoppingTooltip2:SetScript("OnUpdate", speTooltipCompare2)
 -- ShoppingTooltip2:SetScript("OnHide", speTooltipCompare2)
--- ShoppingTooltip2:SetScript("OnUpdate", speTooltipCompare2)
+-- ShoppingTooltip2:HookScript("OnShow", speTooltipCompare2)
 
 
 -- --copmare Vals stats
