@@ -147,12 +147,12 @@ GameTooltip:SetScript("OnUpdate", speTooltip)
 
 --tooltip1 stats
 local function speTooltipCompare1(self)
-    intNumComp1 = 0
-    hitNumComp1 = 0
-    critNumComp1 = 0
-    spNumComp1 = 0
-    spValComp1 = 0
-     local rowLastComp1 = 0
+    local intNumComp1 = 0
+    local hitNumComp1 = 0
+    local critNumComp1 = 0
+    local spNumComp1 = 0
+    local spValComp1 = 0
+    local rowLastComp1 = 0
     for j=1, ShoppingTooltip1:NumLines() do
          spetextComp1 = _G["ShoppingTooltip1TextLeft"..j]:GetText()
          intFindComp1 = strmatch(spetextComp1:lower(),"^+%d+ intellect$")
@@ -219,11 +219,11 @@ ShoppingTooltip1:SetScript("OnUpdate", speTooltipCompare1)
 
 -- tooltip2 stats
  function speTooltipCompare2(self)
-    intNumComp2 = 0
-    hitNumComp2 = 0
-    critNumComp2 = 0
-    spNumComp2 = 0
-    spValComp2 = 0
+    local intNumComp2 = 0
+    local hitNumComp2 = 0
+    local critNumComp2 = 0
+    local spNumComp2 = 0
+    local spValComp2 = 0
     local rowLastComp2 = 0
     for k=1, ShoppingTooltip2:NumLines() do
          spetextComp2 = _G["ShoppingTooltip2TextLeft"..k]:GetText()
