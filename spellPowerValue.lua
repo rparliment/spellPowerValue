@@ -69,11 +69,11 @@ local function getCurrentStats(self)
     local maxLen = math.max(hitLen, critLen, intLen)
     local minLen = math.min(hitLen, critLen, intLen)
     if hitLen == maxLen then
-        statFrame.TextLabel:SetText(spe.." SPE\n1% HIT  = "..hitValue.." SP\n1% CRIT =  "..critValue.." SP\n1  INT  =  "..intValue.." SP")
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SP\n1% CRIT =  "..critValue.." SP\n1  INT  =  "..intValue.." SP")
     elseif critLen == maxLen then
-        statFrame.TextLabel:SetText(spe.." SPE\n1% HIT  =  "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1  INT  =  "..intValue.." SP")
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  =  "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1  INT  =  "..intValue.." SP")
     else
-        statFrame.TextLabel:SetText(spe.." SPE\n1% HIT  = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1  INT  = "..intValue.." SP")
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1  INT  = "..intValue.." SP")
     end
 end
 statFrame:SetScript("OnUpdate", getCurrentStats)
@@ -131,7 +131,7 @@ local function speTooltip(self)
     end
     spVal = intNum + hitNum + critNum + spNum
     if spVal > 0 then
-        tooltipFrame.TextLabel:SetText(spVal.." SPE")
+        tooltipFrame.TextLabel:SetText(spVal.." SPe")
     else
         tooltipFrame.TextLabel:SetText("")
         spetext = "0"
@@ -198,10 +198,10 @@ local function speTooltipCompare1(self)
         if spVal ~= spValComp1 and spVal ~= nil and spValComp1 ~= nil then
             local maxVal1 = math.max(spVal, spValComp1)
             if spVal == maxVal1 then
-                tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPE\n+"..(spVal - spValComp1).." SPE|r")
+                tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPe\n+"..(spVal - spValComp1).." SPe|r")
                 tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SP|r")
             elseif spValComp1 == maxVal1 then
-                tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPE\n–"..(spValComp1 - spVal).." SPE|r")
+                tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe\n–"..(spValComp1 - spVal).." SPe|r")
                 tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SP\n|r")
             end
         end
