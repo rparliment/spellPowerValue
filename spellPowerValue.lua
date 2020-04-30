@@ -269,27 +269,32 @@ GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
         end
     end
     spValComp2 = intNumComp2 + hitNumComp2 + critNumComp2 + spNumComp2
-    if spValComp2 > 0 then
         if spVal ~= nil then
-            if (spVal > spValComp1) and (spVal > spValComp2) then
-                tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPe|r")
-                tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")
-                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
-            elseif (spValComp1 > spVal and spVal > spValComp2) then
-                tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
+            if spValComp1 > spVal then
                 tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n+"..(spValComp1 - spVal).." SPe|r")
-                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
-            elseif (spValComp2 > spVal and spVal > spValComp1) then
-                tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
-                tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")
-                tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n+"..(spValComp2 - spVal).." SPe|r")                
-            elseif (spValComp2 > spVal and spValComp1 > spVal) then
-                tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe|r")
-                tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n+"..(spValComp1 - spVal).." SPe|r")
+            elseif spValComp1 == spVal then
+                tooltipCompare1Frame.TextLabel:SetText(spValComp1.." SPe")
+            else
+                tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")               
+            end
+            if spValComp2 > spVal then
                 tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n+"..(spValComp2 - spVal).." SPe|r")
+            elseif spValComp2 == spVal then
+                tooltipCompare2Frame.TextLabel:SetText(spValComp2.." SPe")
+            else
+                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
+            end
+            if (spVal > spValComp1 and spVal > spValComp2) then
+                tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPe|r")
+            elseif (spValComp1 > spVal and spVal > spValComp2) or (spValComp2 > spVal and spVal > spValComp1) then
+                tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
+            else
+                tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe|r")
             end
         end
-    else
+    if spVal == 0 and spValComp1 == 0 and spValComp2 == 0 then
+        tooltipFrame.TextLabel:SetText("")
+        tooltipCompare1Frame.TextLabel:SetText("")
         tooltipCompare2Frame.TextLabel:SetText("")
     end
 end
