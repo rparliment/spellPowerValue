@@ -140,12 +140,11 @@ local function speTooltip(self)
         end
     end
     spVal = intNum + hitNum + critNum + spNum
-    -- if spVal > 0 then
+    if spVal > 0 then
         tooltipFrame.TextLabel:SetText(spVal.." SPe")
-    -- else
-        -- tooltipFrame.TextLabel:SetText("")
-        -- spetext = "0"
-    -- end
+    else
+        tooltipFrame.TextLabel:SetText("")
+    end
 end
 GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
 GameTooltip:HookScript("OnHide", speTooltip)
