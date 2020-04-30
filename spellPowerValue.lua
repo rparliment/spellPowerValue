@@ -208,7 +208,7 @@ local function speTooltipCompare1(self)
             elseif spValComp1 > spVal then
                 tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe\n–"..(spValComp1 - spVal).." SPe|r")
                 tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n|r")
-            else
+            elseif spVal == spValComp1 then
                 tooltipFrame.TextLabel:SetText(spVal.." SPe")
                 tooltipCompare1Frame.TextLabel:SetText(spValComp1.." SPe")
             end
@@ -221,81 +221,83 @@ GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
 
 -- tooltip2 stats
  function speTooltipCompare2(self)
-    local intNumComp2 = 0
-    local hitNumComp2 = 0
-    local critNumComp2 = 0
-    local spNumComp2 = 0
-    local spValComp2 = 0
-    local rowLastComp2 = 0
-    for i=1, ShoppingTooltip2:NumLines() do
-         spetextComp2 = _G["ShoppingTooltip2TextLeft"..i]:GetText()
-         intFindComp2 = strmatch(spetextComp2:lower(),"^+%d+ intellect$")
-         spellFindComp2 = strmatch(spetextComp2:lower(),".*spell.*%d+")
-         hitFindComp2 = strmatch(spetextComp2:lower(),"hit.*$")
-         critFindComp2 = strmatch(spetextComp2:lower(),"crit.*$")
-        if not strmatch(spetextComp2:lower(),".*use:.*") then
-            if intFindComp2 ~= nil then
-                if i ~= rowLast then
-                    intNumComp2 = (strmatch(intFindComp2,"%d+") * intValue) + intNumComp2
-                    rowLastComp2 = i
+    if ShoppingTooltip2:IsShown() then
+        local intNumComp2 = 0
+        local hitNumComp2 = 0
+        local critNumComp2 = 0
+        local spNumComp2 = 0
+        local spValComp2 = 0
+        local rowLastComp2 = 0
+        for i=1, ShoppingTooltip2:NumLines() do
+             spetextComp2 = _G["ShoppingTooltip2TextLeft"..i]:GetText()
+             intFindComp2 = strmatch(spetextComp2:lower(),"^+%d+ intellect$")
+             spellFindComp2 = strmatch(spetextComp2:lower(),".*spell.*%d+")
+             hitFindComp2 = strmatch(spetextComp2:lower(),"hit.*$")
+             critFindComp2 = strmatch(spetextComp2:lower(),"crit.*$")
+            if not strmatch(spetextComp2:lower(),".*use:.*") then
+                if intFindComp2 ~= nil then
+                    if i ~= rowLast then
+                        intNumComp2 = (strmatch(intFindComp2,"%d+") * intValue) + intNumComp2
+                        rowLastComp2 = i
+                    end
+                end
+                if spellFindComp2 ~= nil and not strmatch(spellFindComp2,".*set.*")then
+                    if strmatch(spellFindComp2,"18\/spell") then
+                        hitNumComp2 = (strmatch(hitFindComp2,"%d+") * hitValue) + hitNumComp2
+                        spNumComp2 = strmatch(spellFindComp2,"%d+") + spNumComp2
+                        rowLastComp2 = i
+                    else
+                        if hitFindComp2 ~= nil then
+                            if i ~= rowLastComp2 then
+                                hitNumComp2 = (strmatch(hitFindComp2,"%d+") * hitValue) + hitNumComp2
+                                rowLastComp2 = i
+                            end
+                        end
+                        if critFindComp2 ~= nil then
+                            if i ~= rowLastComp2 then
+                                critNumComp2 = (strmatch(critFindComp2,"%d+") * critValue) + critNumComp2
+                                rowLastComp2 = i
+                            end
+                        end
+                        if not (strmatch(spellFindComp2,".*shadow.*") or strmatch(spellFindComp2,".*fire.*") or strmatch(spellFindComp2,".*nature.*") or strmatch(spellFindComp2,".*arcane.*")) and strmatch(spellFindComp2,".*damage.*") then
+                            if i ~= rowLastComp2 then
+                                spNumComp2 = strmatch(spellFindComp2,"%d+") + spNumComp2
+                                rowLastComp2 = i
+                            end
+                        end
+                    end
                 end
             end
-            if spellFindComp2 ~= nil and not strmatch(spellFindComp2,".*set.*")then
-                if strmatch(spellFindComp2,"18\/spell") then
-                    hitNumComp2 = (strmatch(hitFindComp2,"%d+") * hitValue) + hitNumComp2
-                    spNumComp2 = strmatch(spellFindComp2,"%d+") + spNumComp2
-                    rowLastComp2 = i
+        end
+        spValComp2 = intNumComp2 + hitNumComp2 + critNumComp2 + spNumComp2
+            if spVal ~= nil then
+                if spValComp1 > spVal then
+                    tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n+"..(spValComp1 - spVal).." SPe|r")
+                elseif spValComp1 == spVal then
+                    tooltipCompare1Frame.TextLabel:SetText(spValComp1.." SPe")
                 else
-                    if hitFindComp2 ~= nil then
-                        if i ~= rowLastComp2 then
-                            hitNumComp2 = (strmatch(hitFindComp2,"%d+") * hitValue) + hitNumComp2
-                            rowLastComp2 = i
-                        end
-                    end
-                    if critFindComp2 ~= nil then
-                        if i ~= rowLastComp2 then
-                            critNumComp2 = (strmatch(critFindComp2,"%d+") * critValue) + critNumComp2
-                            rowLastComp2 = i
-                        end
-                    end
-                    if not (strmatch(spellFindComp2,".*shadow.*") or strmatch(spellFindComp2,".*fire.*") or strmatch(spellFindComp2,".*nature.*") or strmatch(spellFindComp2,".*arcane.*")) and strmatch(spellFindComp2,".*damage.*") then
-                        if i ~= rowLastComp2 then
-                            spNumComp2 = strmatch(spellFindComp2,"%d+") + spNumComp2
-                            rowLastComp2 = i
-                        end
-                    end
+                    tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")               
+                end
+                if spValComp2 > spVal then
+                    tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n+"..(spValComp2 - spVal).." SPe|r")
+                elseif spValComp2 == spVal then
+                    tooltipCompare2Frame.TextLabel:SetText(spValComp2.." SPe")
+                else
+                    tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
+                end
+                if (spVal > spValComp1 and spVal > spValComp2) then
+                    tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPe|r")
+                elseif (spValComp1 > spVal and spVal > spValComp2) or (spValComp2 > spVal and spVal > spValComp1) then
+                    tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
+                else
+                    tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe|r")
                 end
             end
+        if spVal == 0 and spValComp1 == 0 and spValComp2 == 0 then
+            tooltipFrame.TextLabel:SetText("")
+            tooltipCompare1Frame.TextLabel:SetText("")
+            tooltipCompare2Frame.TextLabel:SetText("")
         end
-    end
-    spValComp2 = intNumComp2 + hitNumComp2 + critNumComp2 + spNumComp2
-        if spVal ~= nil then
-            if spValComp1 > spVal then
-                tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n+"..(spValComp1 - spVal).." SPe|r")
-            elseif spValComp1 == spVal then
-                tooltipCompare1Frame.TextLabel:SetText(spValComp1.." SPe")
-            else
-                tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")               
-            end
-            if spValComp2 > spVal then
-                tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n+"..(spValComp2 - spVal).." SPe|r")
-            elseif spValComp2 == spVal then
-                tooltipCompare2Frame.TextLabel:SetText(spValComp2.." SPe")
-            else
-                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
-            end
-            if (spVal > spValComp1 and spVal > spValComp2) then
-                tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPe|r")
-            elseif (spValComp1 > spVal and spVal > spValComp2) or (spValComp2 > spVal and spVal > spValComp1) then
-                tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
-            else
-                tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe|r")
-            end
-        end
-    if spVal == 0 and spValComp1 == 0 and spValComp2 == 0 then
-        tooltipFrame.TextLabel:SetText("")
-        tooltipCompare1Frame.TextLabel:SetText("")
-        tooltipCompare2Frame.TextLabel:SetText("")
     end
 end
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare2)
