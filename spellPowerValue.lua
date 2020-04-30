@@ -50,13 +50,6 @@ tooltipCompare2Frame.TextLabel:SetPoint("TOPRIGHT", ShoppingTooltip2, "TOPRIGHT"
 tooltipCompare2Frame.TextLabel:SetJustifyH("RIGHT")
 tooltipCompare2Frame.TextLabel:SetJustifyV("CENTER")
 
-tooltipCompare2Frame.TextCompare = tooltipCompare2Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-tooltipCompare2Frame.TextCompare:SetFont("Interface\\AddOns\\spellPowerValue\\consolab.ttf", 10, "OUTLINE")
-tooltipCompare2Frame.TextCompare:SetTextColor(1, 1, 1, 1)
-tooltipCompare2Frame.TextCompare:SetPoint("TOPRIGHT", GameTooltip, "TOPRIGHT", -5, -5)
-tooltipCompare2Frame.TextCompare:SetJustifyH("RIGHT")
-tooltipCompare2Frame.TextCompare:SetJustifyV("CENTER")
-
 
 --variable init getCurrentStats
 local hitValue
@@ -278,15 +271,22 @@ GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
     spValComp2 = intNumComp2 + hitNumComp2 + critNumComp2 + spNumComp2
     if spValComp2 > 0 then
         if spVal ~= nil then
-            if spVal > spValComp2 then
-                tooltipCompare2Frame.TextCompare:SetText("|cFF00FF00\n\n"..spVal.." SPe\n+"..(spVal - spValComp2).." SPe|r")
-                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe|r")
-            elseif spValComp2 > spVal then
-                tooltipCompare2Frame.TextCompare:SetText("|cFFFF0000\n\n"..spVal.." SPe\n–"..(spValComp2 - spVal).." SPe|r")
-                tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n|r")
+            if (spVal > spValComp1) and (spVal > spValComp2) then
+                tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SPe|r")
+                tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")
+                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
+            elseif (spValComp1 > spVal and spVal > spValComp2) then
+                tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
+                tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n+"..(spValComp1 - spVal).." SPe|r")
+                tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SPe\n"..(spValComp2 - spVal).." SPe|r")
+            elseif (spValComp2 > spVal and spVal > spValComp1) then
+                tooltipFrame.TextLabel:SetText("|cFFFFFF00"..spVal.." SPe|r")
+                tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SPe\n"..(spValComp1 - spVal).." SPe|r")
+                tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n+"..(spValComp2 - spVal).." SPe|r")
             else
-                tooltipCompare2Frame.TextCompare:SetText("\n\n"..spVal.." SPe")
-                tooltipCompare2Frame.TextLabel:SetText(spValComp2.." SPe")
+                tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SPe|r")
+                tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SPe\n+"..(spValComp1 - spVal).." SPe|r")
+                tooltipCompare2Frame.TextLabel:SetText("|cFF00FF00"..spValComp2.." SPe\n+"..(spValComp2 - spVal).." SPe|r")
             end
         end
     else
@@ -294,49 +294,3 @@ GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
     end
 end
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare2)
-
-
--- --copmare Vals stats
--- local function speCompareVal1(self)
-    -- if spVal ~= spValComp1 and spVal ~= nil and spValComp1 ~= nil then
-        -- maxVal1 = math.max(spVal, spValComp1)
-        -- if spVal == maxVal1 then
-            -- tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SP\n"..(spVal - spValComp1).." SP|r")
-            -- tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1" SP|r")
-        -- elseif spValComp1 == maxVal1 then
-            -- tooltipFrame.TextLabel:SetText("|cFFFF0000"..spVal.." SP\n"..(spValComp1 - spVal).." SP|r")
-            -- tooltipCompare1Frame.TextLabel:SetText("|cFF00FF00"..spValComp1.." SP\n|r")
-        -- end
-    -- end
--- end
--- ShoppingTooltip1:HookScript("OnTooltipSetItem", speCompareVal1)
-
-
-
--- local function speCompareVal2(self)
-    -- maxVal2 = math.max(spVal, spValComp2)
-    -- if spVal == maxVal2 then
-        -- tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SP|r")
-        -- tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SP\n"..spVal - spValComp1.." SP|r")
-        -- tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SP\n"..spVal - spValComp2.." SP|r")
-    -- elseif spValComp1 == maxVal2 then
-        -- tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SP|r")
-        -- tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SP\n"..spVal - spValComp1.." SP|r")
-        -- tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SP\n"..spVal - spValComp2.." SP|r")
-    -- elseif spValComp2 == maxVal2 then
-        -- tooltipFrame.TextLabel:SetText("|cFF00FF00"..spVal.." SP|r")
-        -- tooltipCompare1Frame.TextLabel:SetText("|cFFFF0000"..spValComp1.." SP\n"..spVal - spValComp1.." SP|r")
-        -- tooltipCompare2Frame.TextLabel:SetText("|cFFFF0000"..spValComp2.." SP\n"..spVal - spValComp2.." SP|r")
-    -- end
--- end
--- ShoppingTooltip2:HookScript("OnTooltipSetItem", speCompareVal2)
-
-
-
-
-
-
-
-
-
-
