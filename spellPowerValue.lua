@@ -45,7 +45,6 @@ tooltipCompare2Frame.TextLabel:SetJustifyV("CENTER")
 local hitValue
 local critValue
 local intValue
-
 --variable init speTooltip
 local spVal
 
@@ -78,7 +77,6 @@ local function getCurrentStats(self)
     end
 end
 statFrame:SetScript("OnEvent", getCurrentStats)
-
 
 
 --tooltip stats
@@ -132,13 +130,14 @@ local function speTooltip(self)
         end
     end
     spVal = intNum + hitNum + critNum + spNum
-    if spVal ~= nil then
+    if spVal > 0 then
         tooltipFrame.TextLabel:SetText(spVal.." SPE")
     else
         tooltipFrame.TextLabel:SetText("")
         spetext = "0"
     end
 end
+-- GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
 -- GameTooltip:SetScript("OnShow", speTooltip)
 GameTooltip:SetScript("OnUpdate", speTooltip)
 -- GameTooltip:SetScript("OnHide", speTooltip)
@@ -153,41 +152,41 @@ local function speTooltipCompare1(self)
     local spNumComp1 = 0
     local spValComp1 = 0
     local rowLastComp1 = 0
-    for j=1, ShoppingTooltip1:NumLines() do
-         spetextComp1 = _G["ShoppingTooltip1TextLeft"..j]:GetText()
+    for i=1, ShoppingTooltip1:NumLines() do
+         spetextComp1 = _G["ShoppingTooltip1TextLeft"..i]:GetText()
          intFindComp1 = strmatch(spetextComp1:lower(),"^+%d+ intellect$")
          spellFindComp1 = strmatch(spetextComp1:lower(),".*spell.*%d+")
          hitFindComp1 = strmatch(spetextComp1:lower(),"hit.*$")
          critFindComp1 = strmatch(spetextComp1:lower(),"crit.*$")
         if not strmatch(spetextComp1:lower(),".*use:.*") then
             if intFindComp1 ~= nil then
-                if j ~= rowLast then
+                if i ~= rowLast then
                     intNumComp1 = (strmatch(intFindComp1,"%d+") * intValue) + intNumComp1
-                    rowLastComp1 = j
+                    rowLastComp1 = i
                 end
             end
             if spellFindComp1 ~= nil and not strmatch(spellFindComp1,".*set.*")then
                 if strmatch(spellFindComp1,"18\/spell") then
                     hitNumComp1 = (strmatch(hitFindComp1,"%d+") * hitValue) + hitNumComp1
                     spNumComp1 = strmatch(spellFindComp1,"%d+") + spNumComp1
-                    rowLastComp1 = j
+                    rowLastComp1 = i
                 else
                     if hitFindComp1 ~= nil then
-                        if j ~= rowLastComp1 then
+                        if i ~= rowLastComp1 then
                             hitNumComp1 = (strmatch(hitFindComp1,"%d+") * hitValue) + hitNumComp1
-                            rowLastComp1 = j
+                            rowLastComp1 = i
                         end
                     end
                     if critFindComp1 ~= nil then
-                        if j ~= rowLastComp1 then
+                        if i ~= rowLastComp1 then
                             critNumComp1 = (strmatch(critFindComp1,"%d+") * critValue) + critNumComp1
-                            rowLastComp1 = j
+                            rowLastComp1 = i
                         end
                     end
                     if not (strmatch(spellFindComp1,".*shadow.*") or strmatch(spellFindComp1,".*fire.*") or strmatch(spellFindComp1,".*nature.*") or strmatch(spellFindComp1,".*arcane.*")) and strmatch(spellFindComp1,".*damage.*") then
-                        if j ~= rowLastComp1 then
+                        if i ~= rowLastComp1 then
                             spNumComp1 = strmatch(spellFindComp1,"%d+") + spNumComp1
-                            rowLastComp1 = j
+                            rowLastComp1 = i
                         end
                     end
                 end
@@ -195,7 +194,7 @@ local function speTooltipCompare1(self)
         end
     end
     spValComp1 = intNumComp1 + hitNumComp1 + critNumComp1 + spNumComp1
-    if spValComp1 ~= nil then
+    if spValComp1 > 0 then
         if spVal ~= spValComp1 and spVal ~= nil and spValComp1 ~= nil then
             local maxVal1 = math.max(spVal, spValComp1)
             if spVal == maxVal1 then
