@@ -29,7 +29,6 @@ tooltipFrame.TextLabel:SetPoint("TOPRIGHT", GameTooltip, "TOPRIGHT", -5, -5)
 tooltipFrame.TextLabel:SetJustifyH("RIGHT")
 tooltipFrame.TextLabel:SetJustifyV("CENTER")
 
-
 --tooltip compare frame
 local tooltipCompare1Frame = CreateFrame("FRAME", nil, ShoppingTooltip1)
 tooltipCompare1Frame.TextLabel = tooltipCompare1Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -39,9 +38,7 @@ tooltipCompare1Frame.TextLabel:SetPoint("TOPRIGHT", ShoppingTooltip1, "TOPRIGHT"
 tooltipCompare1Frame.TextLabel:SetJustifyH("RIGHT")
 tooltipCompare1Frame.TextLabel:SetJustifyV("CENTER")
 
-
-
---tooltip compare frame
+--tooltip compare frame 2
 local tooltipCompare2Frame = CreateFrame("FRAME", nil, ShoppingTooltip2)
 tooltipCompare2Frame.TextLabel = tooltipCompare2Frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 tooltipCompare2Frame.TextLabel:SetFont("Interface\\AddOns\\spellPowerValue\\consolab.ttf", 10, "OUTLINE")
@@ -50,11 +47,11 @@ tooltipCompare2Frame.TextLabel:SetPoint("TOPRIGHT", ShoppingTooltip2, "TOPRIGHT"
 tooltipCompare2Frame.TextLabel:SetJustifyH("RIGHT")
 tooltipCompare2Frame.TextLabel:SetJustifyV("CENTER")
 
-
 --variable init getCurrentStats
 local hitValue
 local critValue
 local intValue
+
 --variable init speTooltip
 local spVal
 
@@ -149,7 +146,6 @@ local function speTooltip(self)
 end
 GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
 GameTooltip:HookScript("OnHide", speTooltip)
-
 
 --tooltip1 stats
 local function speTooltipCompare1(self)
