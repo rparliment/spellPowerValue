@@ -85,7 +85,6 @@ local function getCurrentStats(self)
         statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1  INT  = "..intValue.." SPe")
     end
 end
-statFrame:SetScript("OnEvent", getCurrentStats)
 
 --tooltip stats
 local function speTooltip(self)
@@ -144,8 +143,6 @@ local function speTooltip(self)
         tooltipFrame.TextLabel:SetText("")
     end
 end
-GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
-GameTooltip:HookScript("OnHide", speTooltip)
 
 --tooltip1 stats
 local function speTooltipCompare1(self)
@@ -215,7 +212,6 @@ local function speTooltipCompare1(self)
         end
     end
 end
-GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
 
 -- tooltip2 stats
  function speTooltipCompare2(self)
@@ -298,4 +294,9 @@ GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
         end
     end
 end
+
+statFrame:SetScript("OnEvent", getCurrentStats)
+GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
+GameTooltip:HookScript("OnHide", speTooltip)
+GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare2)
