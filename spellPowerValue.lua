@@ -58,6 +58,9 @@ local spVal
 --variable init speTooltipCompare1
 local spValComp1
 
+--variable init speTooltipCompare2
+local spValComp2
+
 --stat weights
 local function getCurrentStats(self)
     local _,_,_,_,talent = GetTalentInfo(3,3)
@@ -214,13 +217,12 @@ local function speTooltipCompare1(self)
 end
 
 -- tooltip2 stats
- function speTooltipCompare2(self)
+local function speTooltipCompare2(self)
     if ShoppingTooltip2:IsShown() then
         local intNumComp2 = 0
         local hitNumComp2 = 0
         local critNumComp2 = 0
         local spNumComp2 = 0
-        local spValComp2 = 0
         local rowLastComp2 = 0
         for i=1, ShoppingTooltip2:NumLines() do
              spetextComp2 = _G["ShoppingTooltip2TextLeft"..i]:GetText()
