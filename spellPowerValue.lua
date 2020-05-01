@@ -1,10 +1,3 @@
-local function CMCommands(msg, editbox)
-ReloadUI()
-end
-
-SLASH_CM1 = "/rl"
-SlashCmdList["CM"] = CMCommands
-
 --char sheet frame
 local statFrame = CreateFrame("FRAME", nil, CharacterModelFrame)
 statFrame.TextLabel = statFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -295,6 +288,10 @@ local function speTooltipCompare2(self)
             tooltipCompare2Frame.TextLabel:SetText("")
         end
     end
+end
+
+local function getTooltipText(self)
+
 end
 
 statFrame:SetScript("OnEvent", getCurrentStats)
