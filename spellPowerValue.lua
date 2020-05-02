@@ -44,6 +44,7 @@ tooltipCompare2Frame.TextLabel:SetJustifyV("CENTER")
 local hitValue
 local critValue
 local intValue
+local spe
 
 --variable init speTooltip
 local spVal
@@ -70,7 +71,7 @@ local function getCurrentStats(self)
     hitValue = format("%.2f",((spellDmg / spellCoef) / spellHit) / 100)
     critValue = format("%.2f",((spellDmg / spellCoef) / (1 + spellCrit)) / 100)
     intValue = format("%.2f",critValue / 59.5)
-    local spe = format("%.2f",(spellPower + ((GetSpellHitModifier(5) + (talent * 2) * hitValue) + (GetSpellCritChance(5) * critValue))))
+    spe = format("%.2f",(spellPower + ((GetSpellHitModifier(5) + (talent * 2) * hitValue) + (GetSpellCritChance(5) * critValue))))
     local hitLen = strlen(hitValue)
     local critLen = strlen(critValue)
     local intLen = strlen(intValue)
