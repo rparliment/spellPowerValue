@@ -54,10 +54,6 @@ local spValComp1
 --variable init speTooltipCompare2
 local spValComp2
 
-local function textFormat(hit, crit, int)
-	statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hit.." SP\n1% CRIT = "..crit.." SP\n1 INT = "..int.." SPe")
-end
-
 --stat weights
 local function getCurrentStats(self)
     local _,_,_,_,talent = GetTalentInfo(3,3)
@@ -79,11 +75,11 @@ local function getCurrentStats(self)
     local minLen = math.min(hitLen, critLen, intLen)
 	
     if hitLen == maxLen then
-        textFormat(hitValue, critValue, intValue)
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
     elseif critLen == maxLen then
-        textFormat(hitValue, critValue, intValue)
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
     else
-        textFormat(hitValue, critValue, intValue)
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
     end
 end
 
