@@ -67,18 +67,18 @@ local function getCurrentStats(self)
     critValue = format("%.2f",((spellDmg / spellCoef) / (1 + spellCrit)) / 100)
     intValue = format("%.2f",critValue / 59.5)
     local spe = format("%.2f",(spellPower + ((GetSpellHitModifier(5) + (talent * 2) * hitValue) + (GetSpellCritChance(5) * critValue))))
-    
+    local DPSe = format("%.2f",(spellBase + (spellCoef * spe)) / 2.5)
     local hitLen = strlen(hitValue)
     local critLen = strlen(critValue)
     local intLen = strlen(intValue)
     local maxLen = math.max(hitLen, critLen, intLen)
     local minLen = math.min(hitLen, critLen, intLen)
     if hitLen == maxLen then
-        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SPe\n1% CRIT =  "..critValue.." SPe\n1  INT  =  "..intValue.." SPe")
+        statFrame.TextLabel:SetText(spe.." SPe\n"..DPSe.." DPS\n1% HIT  = "..hitValue.." SPe\n1% CRIT =  "..critValue.." SPe\n1  INT  =  "..intValue.." SPe")
     elseif critLen == maxLen then
-        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  =  "..hitValue.." SPe\n1% CRIT = "..critValue.." SPe\n1  INT  =  "..intValue.." SPe")
+        statFrame.TextLabel:SetText(spe.." SPe\n"..DPSe.." DPS\n1% HIT  =  "..hitValue.." SPe\n1% CRIT = "..critValue.." SPe\n1  INT  =  "..intValue.." SPe")
     else
-        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SPe\n1% CRIT = "..critValue.." SPe\n1  INT  = "..intValue.." SPe")
+        statFrame.TextLabel:SetText(spe.." SPe\n"..DPSe.." DPS\n1% HIT  = "..hitValue.." SPe\n1% CRIT = "..critValue.." SPe\n1  INT  = "..intValue.." SPe")
     end
 end
 
