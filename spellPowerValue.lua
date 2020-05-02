@@ -55,7 +55,7 @@ local spValComp1
 local spValComp2
 
 local function textFormat(hit, crit, int)
-	statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hit.." SP\n1% CRIT = "..crit.." SP\n1 INT = "..int.." SPe")
+	statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hit.." SP\n1% CRIT = "..crit.." SP\n1 INT = "..int.." SP")
 end
 
 --stat weights
