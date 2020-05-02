@@ -75,11 +75,11 @@ local function getCurrentStats(self)
     local minLen = math.min(hitLen, critLen, intLen)
 	
     if hitLen == maxLen then
-        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
     elseif critLen == maxLen then
-        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
     else
-        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
+        statFrame.TextLabel:SetText(spe.." SPe\n1% HIT  = "..hitValue.." SP\n1% CRIT = "..critValue.." SP\n1 INT = "..intValue.." SPe")
     end
 end
 
