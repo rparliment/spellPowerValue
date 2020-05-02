@@ -56,21 +56,33 @@ local spValComp2
 
 --stat weights
 local function getCurrentStats(self)
+    local spellCoef
+    local spellBase
+    local talent
+    local  _,class = UnitClass("player")
+    if class == "MAGE" then
+        spellCoef = 0.814
+        spellBase = 457
+        _,_,_,_,talent = GetTalentInfo(3,3)
+    elseif class == "WARLOCK" then
+        spellCoef = 0.857
+        spellBase = 481
+        -- _,_,_,_,talent = GetTalentInfo(3,7)
+    end
     local _,_,_,_,talent = GetTalentInfo(3,3)
     local spellPower = GetSpellBonusDamage(5)
     local spellHit = (100 - (17 - (GetSpellHitModifier(5) + (talent * 2)))) / 100
     local spellCrit = GetSpellCritChance(5) / 100
-    local spellCoef = 0.814
-    local spellBase = 457
+
     local spellDmg = spellBase + (spellCoef * spellPower)
     hitValue = format("%.2f",((spellDmg / spellCoef) / spellHit) / 100)
     critValue = format("%.2f",((spellDmg / spellCoef) / (1 + spellCrit)) / 100)
     intValue = format("%.2f",critValue / 59.5)
     local spe = format("%.2f",(spellPower + ((GetSpellHitModifier(5) + (talent * 2) * hitValue) + (GetSpellCritChance(5) * critValue))))
+    
     local hitLen = strlen(hitValue)
     local critLen = strlen(critValue)
     local intLen = strlen(intValue)
-    
     local maxLen = math.max(hitLen, critLen, intLen)
     local minLen = math.min(hitLen, critLen, intLen)
     if hitLen == maxLen then
