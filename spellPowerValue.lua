@@ -290,12 +290,9 @@ local function speTooltipCompare2(self)
     end
 end
 
-local function getTooltipText(self)
-
-end
 
 statFrame:SetScript("OnEvent", getCurrentStats)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
-GameTooltip:HookScript("OnHide", speTooltip)
+GameTooltip:SetScript("OnHide", speTooltip)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare2)
