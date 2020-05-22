@@ -294,5 +294,6 @@ end
 statFrame:SetScript("OnEvent", getCurrentStats)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltip)
 GameTooltip:SetScript("OnHide", speTooltip)
+GameTooltip:HookScript("OnHide", speTooltip)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare1)
 GameTooltip:HookScript("OnTooltipSetItem", speTooltipCompare2)
